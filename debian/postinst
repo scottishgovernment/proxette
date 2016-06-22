@@ -1,0 +1,40 @@
+#!/bin/sh
+# postinst script for trigger
+#
+# see: dh_installdeb(1)
+
+set -e
+
+configure() {
+  adduser \
+    --quiet \
+    --system \
+    --home /opt/proxette \
+    --no-create-home \
+    --shell /bin/bash \
+    --group \
+    --gecos "MyGov Authenticating Proxy" \
+    proxette
+  mkdir -p /var/log/proxette
+  chmod 755 /var/log/proxette
+  chown proxette:proxette /var/log/proxette
+  service proxette start
+}
+
+case "$1" in
+    configure)
+      configure
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+#DEBHELPER#
+
+exit 0

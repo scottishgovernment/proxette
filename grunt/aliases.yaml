@@ -1,0 +1,16 @@
+test:
+  description: 'Run tests'
+  tasks:
+    - copy:test
+    - instrument
+    - jasmine_node:test
+    - storeCoverage
+    - makeReport
+sonar:
+  description: 'Run SonarQube in preview mode'
+  tasks:
+    - sonarRunner:preview
+sonar-ci:
+  description: 'Run SonarQube and publish results'
+  tasks:
+    - sonarRunner:analysis

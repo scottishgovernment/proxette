@@ -1,0 +1,11 @@
+Source: proxette
+Section: mygov
+Priority: optional
+Maintainer: Martin Ellis <martin.ellis@gov.scot>
+Build-Depends: debhelper (>= 8.0.0), rsync
+Standards-Version: 3.9.4
+
+Package: proxette
+Architecture: all
+Depends: ${misc:Depends}
+Description: Authenticating proxy for Rubric.

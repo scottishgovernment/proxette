@@ -1,0 +1,6 @@
+application:
+  name: proxette
+port:
+  8092
+authentication:
+  endpoint: http://localhost:8086/security/sessions/

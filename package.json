@@ -1,0 +1,31 @@
+{
+  "name": "proxette",
+  "version": "0.0.1",
+  "description": "Authenticates an proxies requests in MyGov publishing system.",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@stash.digital.gov.uk:7999/mgv/front-desk.git"
+  },
+  "author": "Martin Ellis <martin.ellis@gov.scot>",
+  "license": "MIT",
+  "dependencies": {
+    "config-weaver": "0.0.15",
+    "restler": "^3.4.0"
+  },
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-istanbul": "^0.7.0",
+    "grunt-jasmine-node": "^0.3.1",
+    "grunt-sonar-runner": "^2.4.7",
+    "jasmine-beforeall": "^0.1.1",
+    "load-grunt-config": "^0.19.2"
+  },
+  "publishConfig": {
+    "registry": "http://repo.digital.gov.uk/nexus/content/repositories/npm/"
+  }
+}

@@ -1,0 +1,49 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+
+#export DH_VERBOSE=1
+NPM=/usr/local/bin/npm
+PKG=proxette
+
+override_dh_auto_build:
+	test -d node_modules || npm install
+
+override_dh_auto_test:
+#	PATH=/usr/local/bin:$$PATH \
+#	  grunt $(test -t 1 && echo --no-color) test
+
+override_dh_install:
+	dh_install
+	$(NPM) ls --parseable | \
+	  sed "s@$$PWD/node_modules/@@" | \
+	  sort \
+	  > target/deps-all.txt
+	$(NPM) ls --parseable --production | \
+	sed "s@$$PWD/node_modules/@@" | \
+	  sort \
+	  > target/deps-prod.txt
+	comm -23 target/deps-all.txt target/deps-prod.txt > target/deps-test.txt
+	mkdir -p debian/$(PKG)/opt/proxette
+	rsync -a \
+	  --delete \
+	  --delete-excluded \
+	  --exclude-from=target/deps-test.txt \
+	  node_modules/ debian/$(PKG)/opt/proxette/node_modules/
+
+override_dh_fixperms:
+	find debian/$(PKG) -print0 2>/dev/null | xargs -0r chown --no-dereference 0:0
+	find debian/$(PKG) ! -type l  -print0 2>/dev/null | xargs -0r chmod go=rX,u+rw,a-s
+	find debian/$(PKG)/usr/share/doc -type f  ! -regex 'debian/'$(PKG)'/usr/share/doc/[^/]*/examples/.*' -print0 2>/dev/null | xargs -0r chmod 644
+	find debian/$(PKG)/usr/share/doc -type d  -print0 2>/dev/null | xargs -0r chmod 755
+
+override_dh_builddeb:
+	dpkg-deb -b debian/$(PKG) $(OUTDIR)
+build %:
+	dh $@
+
+# Skip these debhelper targets
+override_dh_auto_configure:
+override_dh_auto_install:
+override_dh_link:
+override_dh_perl:
+.PHONY: build

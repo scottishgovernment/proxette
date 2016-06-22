@@ -1,0 +1,12 @@
+*.iml
+*.deb
+.sonar
+debian/changelog
+debian/files
+debian/proxette
+debian/proxette.debhelper.log
+debian/proxette.*.debhelper
+debian/proxette.substvars
+node_modules
+npm-debug.log
+target
