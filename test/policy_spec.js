@@ -2,6 +2,10 @@ var policy = require('../target/src/policy.js');
 
 describe('Policy', function() {
 
+    it('allows anonymous access with an empty string', function() {
+        expect(result('')).toEqual(null);
+    });
+
     it('allows a single role to be specified', function() {
         expect(result('admin')).toEqual([ 'admin' ]);
     });

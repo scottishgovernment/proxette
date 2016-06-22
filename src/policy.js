@@ -8,6 +8,9 @@
 function allowedRoles(request) {
     var headers = request.headers;
     var rolesText = headers['x-proxy-roles'];
+    if (!rolesText) {
+        return null;
+    }
     var roles = rolesText.split(/\s+/);
     return roles;
 }
