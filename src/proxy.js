@@ -11,6 +11,13 @@ function Proxy (client, policy, router) {
 }
 
 Proxy.prototype.handleRequest = function (req, res) {
+  req.on('error', function (err) {
+      console.log('Request error:', err);
+  });
+  res.on('error', function (err) {
+      console.log('Response error:', err);
+  });
+
   var that = this;
   // Pause the stream to avoid buffering request before it is authenticated,
   // and the upstream connection is established.
@@ -61,9 +68,17 @@ Proxy.prototype.proxyRequest = function (req, res, context, auth) {
 Proxy.prototype.proxy = function (request, response, upstream, auth) {
     var that = this;
     var conn = http.request(upstream, function(resp) {
+        resp.on('error', function (err) {
+            that.logRequest(request, auth, 502);
+            that.sendError(response, 502, err.toString());
+        });
         that.logRequest(request, auth, resp.statusCode, resp.statusMessage);
         response.writeHeader(resp.statusCode, resp.headers);
         resp.pipe(response);
+    });
+    conn.on('error', function(err) {
+        that.logRequest(request, auth, 502);
+        that.sendError(response, 502, err.toString());
     });
     request.pipe(conn);
     request.resume();

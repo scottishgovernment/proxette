@@ -20,9 +20,9 @@ describe('Proxy', function() {
         client.authenticate.andCallFake(function (token, callback) {
             callback(auth);
         });
-        req = jasmine.createSpyObj('request', [ 'pause', 'pipe', 'resume' ]);
+        req = jasmine.createSpyObj('request', [ 'pause', 'pipe', 'resume', 'on' ]);
         req.headers = {};
-        res = jasmine.createSpyObj('response', [ 'pipe', 'writeHead', 'end' ]);
+        res = jasmine.createSpyObj('response', [ 'pipe', 'writeHead', 'end', 'on' ]);
         sut = proxy.create(client, policy, router);
         spyOn(sut, 'proxy');
     });
