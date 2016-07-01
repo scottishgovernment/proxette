@@ -1,4 +1,8 @@
 #!/usr/bin/env node
+/**
+ * Proxette entry point.
+ * Initialises and runs the Proxette service.
+ */
 'use strict';
 
 var path = require('path');

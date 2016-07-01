@@ -4,13 +4,13 @@ var http = require('http');
 var net = require('net');
 var url = require('url');
 
-function Proxy (client, policy, router) {
+function HttpProxy (client, policy, router) {
     this.client = client;
     this.policy = policy;
     this.router = router;
 }
 
-Proxy.prototype.handleRequest = function (req, res) {
+HttpProxy.prototype.handleRequest = function (req, res) {
   req.on('error', function (err) {
       console.log('Request error:', err);
   });
@@ -41,7 +41,7 @@ Proxy.prototype.handleRequest = function (req, res) {
   });
 };
 
-Proxy.prototype.hasRequiredRole = function (session, permittedRoles) {
+HttpProxy.prototype.hasRequiredRole = function (session, permittedRoles) {
     var roles = session.userResource.roles;
     for (var i = 0; i < roles.length; i++) {
         var role = roles[i];
@@ -52,7 +52,7 @@ Proxy.prototype.hasRequiredRole = function (session, permittedRoles) {
     return false;
 };
 
-Proxy.prototype.proxyRequest = function (req, res, context, auth) {
+HttpProxy.prototype.proxyRequest = function (req, res, context, auth) {
     var upstream = this.router(context);
     if (!upstream) {
         console.log(new Date().toString(), 'No upstream specified for ' + context.url);
@@ -65,7 +65,7 @@ Proxy.prototype.proxyRequest = function (req, res, context, auth) {
     }
 };
 
-Proxy.prototype.proxy = function (request, response, upstream, auth) {
+HttpProxy.prototype.proxy = function (request, response, upstream, auth) {
     var that = this;
     var conn = http.request(upstream, function(resp) {
         resp.on('error', function (err) {
@@ -84,34 +84,34 @@ Proxy.prototype.proxy = function (request, response, upstream, auth) {
     request.resume();
 };
 
-Proxy.prototype.denied = function (req, res, auth, statusCode, message) {
+HttpProxy.prototype.denied = function (req, res, auth, statusCode, message) {
     req.resume();
     this.logRequest(req, auth, statusCode);
     this.sendError(res, statusCode, message);
 };
 
-Proxy.prototype.logRequest = function (req, auth, statusCode) {
+HttpProxy.prototype.logRequest = function (req, auth, statusCode) {
     var date = new Date().toString();
     var name = this.user(auth) || 'unknown';
     console.log(date, statusCode, req.url, '[' + name + ']');
 };
 
-Proxy.prototype.sendError = function (res, statusCode, message) {
+HttpProxy.prototype.sendError = function (res, statusCode, message) {
     res.writeHead(statusCode, {'Content-Type': 'text/plain'});
     res.end(message);
 };
 
-Proxy.prototype.user = function (auth) {
+HttpProxy.prototype.user = function (auth) {
     var user = auth.session && auth.session.userResource;
     return user && user.name;
 };
 
-Proxy.prototype.handler = function() {
+HttpProxy.prototype.handler = function() {
     return this.handleRequest.bind(this);
 };
 
 function create(client, policy, router) {
-    return new Proxy(client, policy, router);
+    return new HttpProxy(client, policy, router);
 }
 
 module.exports = {

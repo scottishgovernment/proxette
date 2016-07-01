@@ -1,4 +1,4 @@
-var proxy = require('../target/src/proxy.js');
+var proxy = require('../target/src/http_proxy.js');
 var url = require('url');
 
 describe('Proxy', function() {

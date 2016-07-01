@@ -1,11 +1,11 @@
-/**
- * Authentication system client.
- */
 'use strict';
 
 var path = require('path');
 var url = require('url');
 
+/**
+ * Authentication system client.
+ */
 function AuthenticationClient(endpoint) {
     this.endpoint = endpoint;
     this.rest = require('restler');
