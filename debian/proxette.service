@@ -1,0 +1,11 @@
+[Unit]
+Description=Proxette service
+After=network.target
+
+[Service]
+User=proxette
+WorkingDirectory=/opt/proxette
+ExecStart=/bin/bash -c "source /etc/profile; exec /usr/bin/node src/run.js >> /var/log/proxette/proxette.log 2>&1" 
+Restart=on-failure
+[Install]
+WantedBy=multi-user.target

@@ -38,8 +38,10 @@ override_dh_fixperms:
 
 override_dh_builddeb:
 	dpkg-deb -b debian/$(PKG) $(OUTDIR)
-build %:
+build:
 	dh $@
+%:
+	dh $@ --with systemd
 
 # Skip these debhelper targets
 override_dh_auto_configure:

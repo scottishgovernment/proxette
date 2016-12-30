@@ -18,7 +18,6 @@ configure() {
   mkdir -p /var/log/proxette
   chmod 755 /var/log/proxette
   chown proxette:proxette /var/log/proxette
-  service proxette start
 }
 
 case "$1" in
