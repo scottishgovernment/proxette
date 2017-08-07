@@ -15,9 +15,6 @@ configure() {
     --group \
     --gecos "MyGov Authenticating Proxy" \
     proxette
-  mkdir -p /var/log/proxette
-  chmod 755 /var/log/proxette
-  chown proxette:proxette /var/log/proxette
 }
 
 case "$1" in

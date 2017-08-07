@@ -4,6 +4,7 @@
 debian/changelog
 debian/files
 debian/proxette
+debian/debhelper-build-stamp
 debian/proxette.debhelper.log
 debian/proxette.*.debhelper
 debian/proxette.substvars

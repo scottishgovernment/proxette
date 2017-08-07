@@ -1,0 +1,4 @@
+#!/bin/sh
+. /etc/profile
+set -eu
+exec $(dirname $0)/../src/run.js
