@@ -11,6 +11,21 @@ function HttpProxy (client, policy, router) {
 }
 
 HttpProxy.prototype.handleRequest = function (req, res) {
+    if (req.url === '/health') {
+        this.handleHealthRequest(req, res);
+        return;
+    }
+    this.handleProxyRequest(req, res);
+};
+
+HttpProxy.prototype.handleHealthRequest = function (req, res) {
+    res.writeHead(200, {
+      'Content-Type': 'text/plain'
+    });
+    res.end();
+};
+
+HttpProxy.prototype.handleProxyRequest = function (req, res) {
   req.on('error', function (err) {
       console.log('Request error:', err);
   });
