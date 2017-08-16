@@ -11,7 +11,7 @@
       "dev": true
     },
     "amdefine": {
-      "version": "1.0.0",
+      "version": "1.0.1",
       "dev": true
     },
     "ansi-regex": {
@@ -173,7 +173,7 @@
       "dev": true
     },
     "fast-levenshtein": {
-      "version": "2.0.4",
+      "version": "2.0.6",
       "dev": true
     },
     "file-sync-cmp": {
@@ -274,7 +274,7 @@
       "dev": true
     },
     "grunt-istanbul": {
-      "version": "0.7.1",
+      "version": "0.8.0",
       "dependencies": {
         "chalk": {
           "version": "1.1.1",
@@ -322,11 +322,11 @@
       "dev": true
     },
     "grunt-sonar-runner": {
-      "version": "2.4.7",
+      "version": "2.4.8",
       "dev": true
     },
     "handlebars": {
-      "version": "4.0.5",
+      "version": "4.0.10",
       "dependencies": {
         "source-map": {
           "version": "0.4.4",
@@ -375,7 +375,7 @@
       "dev": true
     },
     "is-buffer": {
-      "version": "1.1.4",
+      "version": "1.1.5",
       "dev": true
     },
     "is-builtin-module": {
@@ -402,7 +402,7 @@
           "dev": true
         },
         "supports-color": {
-          "version": "3.1.2",
+          "version": "3.2.3",
           "dev": true
         }
       },
@@ -444,7 +444,7 @@
       "version": "3.6.1"
     },
     "kind-of": {
-      "version": "3.0.4",
+      "version": "3.2.2",
       "dev": true
     },
     "lazy-cache": {
@@ -618,7 +618,7 @@
       "dev": true
     },
     "repeat-string": {
-      "version": "1.5.4",
+      "version": "1.6.1",
       "dev": true
     },
     "repeating": {
@@ -657,7 +657,7 @@
       "version": "0.5.8"
     },
     "sealant": {
-      "version": "0.0.2",
+      "version": "0.0.3",
       "dependencies": {
         "json-stable-stringify": {
           "version": "1.0.1",
@@ -733,13 +733,8 @@
       "dev": true
     },
     "uglify-js": {
-      "version": "2.7.3",
+      "version": "2.8.29",
       "dependencies": {
-        "async": {
-          "version": "0.2.10",
-          "dev": true,
-          "optional": true
-        },
         "source-map": {
           "version": "0.5.6",
           "dev": true,
